@@ -12,7 +12,6 @@
     android:padding="20dp">
 
 
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -26,22 +25,24 @@
             android:src="@drawable/ojo_icon"
             android:layout_above="@+id/editTextUserNameLogin"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/image_view_margin_button_tablet"/>
+            android:layout_marginBottom="38dp"/>
 
         <EditText
             android:id="@+id/editTextUserNameLogin"
-            android:layout_width="@dimen/edit_text_size_with_tablet"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
             android:hint="@string/user_name_default"
-            android:layout_marginBottom="56dp"
-            android:layout_above="@+id/textViewPassWord"
-            android:layout_centerHorizontal="true" />
+            android:layout_marginBottom="47dp"
+            android:layout_above="@+id/editTextViewPassWord"
+            android:layout_alignStart="@+id/editTextViewPassWord"
+            android:layout_marginStart="13dp"
+            android:layout_centerHorizontal="true"/>
 
         <EditText
-            android:id="@+id/textViewPassWord"
-            android:layout_width="@dimen/edit_text_size_with_tablet"
+            android:id="@+id/editTextViewPassWord"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
@@ -53,7 +54,7 @@
 
         <Button
             android:id="@+id/buttonLogin"
-            android:layout_width="@dimen/button_login_with_tablet"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
             android:text="@string/button_login"
             android:layout_alignParentBottom="true"
@@ -61,6 +62,8 @@
             android:layout_marginEnd="14dp"
             android:layout_marginBottom="206dp"
             android:layout_centerHorizontal="true"/>
+
+
 
     </RelativeLayout>
 </LinearLayout>
