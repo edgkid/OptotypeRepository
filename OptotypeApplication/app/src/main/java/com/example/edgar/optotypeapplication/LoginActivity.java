@@ -35,8 +35,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        HttpHandlerUser requestUser = new HttpHandlerUser("users");
-        requestUser.connectToResource(this);
+        //Trabajando en conexion y Login no borrar
+        /*HttpHandlerUser requestUser = new HttpHandlerUser("users");
+        requestUser.connectToResource(this);*/
+
+        Intent DashBoardActivity = new Intent(LoginActivity.this, DashBoardActivity.class);
+        DashBoardActivity .putExtra("UserName",editTextUserName.getText().toString());
+        DashBoardActivity.putExtra("Password",editTextPaswword.getText().toString());
+        startActivity(DashBoardActivity);
 
     }
 }
