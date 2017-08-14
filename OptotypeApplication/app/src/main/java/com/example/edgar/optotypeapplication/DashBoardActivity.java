@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,6 +23,7 @@ public class DashBoardActivity extends AppCompatActivity {
         contextActivity = this;
 
         //Para obtener los datos mientras termino la conexion
+        ///esto deberia ser remplazado por el manejo desesiones y el objeto de usuario
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         String receiver = extras.getString("UserName");
@@ -36,7 +36,6 @@ public class DashBoardActivity extends AppCompatActivity {
             listViewMenu.setAdapter(adapterMenuDoctor);
         if(receiver.equals("Paciente"))
             listViewMenu.setAdapter(adapterMenuPatient);
-
 
     }
 
