@@ -35,15 +35,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-      /* RequestUser requestUser = new RequestUser();
-
-        if (requestUser.findUserOnSystem()){
-            Intent dashBoardActivity = new Intent(LoginActivity.this, DashBoardActivity.class);
-            startActivity(dashBoardActivity);
-        }else{
-            Toast.makeText(contextActivity, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
-        }*/
-
         HttpHandlerUser requestUser = new HttpHandlerUser("users");
         requestUser.connectToResource(this);
 

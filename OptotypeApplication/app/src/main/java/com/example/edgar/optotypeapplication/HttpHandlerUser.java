@@ -1,7 +1,6 @@
 package com.example.edgar.optotypeapplication;
 
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -21,6 +20,7 @@ public class HttpHandlerUser {
 
 
     private String request;
+    public static boolean resonseValue = false;
     ServerPath serverPath = new ServerPath();
 
     public HttpHandlerUser(String request) {
@@ -89,10 +89,11 @@ public class HttpHandlerUser {
                     @Override
                     public void run() {
 
-                        if (verifyRespondeServer(result)){
+                        if (verifyRespondeServer(result)) {
                             Toast.makeText(ctx.getApplicationContext(),"Conexion con el servidor", Toast.LENGTH_SHORT).show();
-                        } else
-                            Toast.makeText(ctx.getApplicationContext(),"Conexion No Datos", Toast.LENGTH_SHORT).show();
+                            Log.d("resultado: ", result);
+                        }else
+                            Toast.makeText(ctx.getApplicationContext(),"No Conexion con el servidor", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -101,6 +102,7 @@ public class HttpHandlerUser {
 
         tr.start();
 
+        //return value[0];
     }
 
 

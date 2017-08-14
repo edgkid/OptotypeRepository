@@ -17,9 +17,6 @@ public class DashBoardActivity extends AppCompatActivity {
 
         contextActivity = this;
 
-        textViewTest = (TextView) findViewById(R.id.prubConnection);
-        textViewTest.setText("prueba");
-
     }
 
 
