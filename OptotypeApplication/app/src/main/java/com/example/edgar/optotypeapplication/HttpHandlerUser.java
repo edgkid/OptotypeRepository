@@ -35,7 +35,7 @@ public class HttpHandlerUser {
         StringBuilder result = null;
         String path = serverPath.getHttp() + serverPath.getIpAdddress() + serverPath.getPathAddress();
 
-        Log.d("get: ",path + this.request);
+        Log.d("path: ", path + this.request);
 
         try{
 
@@ -57,9 +57,14 @@ public class HttpHandlerUser {
 
             }
 
+            Log.d("code: ", Integer.toString(responseCode));
+
         }catch (Exception e){
             e.printStackTrace();
         }
+
+
+        Log.d("result: ", result.toString());
 
         return result.toString();
     }
@@ -85,17 +90,25 @@ public class HttpHandlerUser {
         Thread tr = new Thread(){
             @Override
             public void run() {
-                HttpHandlerUser.jsonValue = sendRequestGet();
+
+                final String result= sendRequestGet();
+                ctx.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (verifyRespondeServer(result)){
+                            Toast.makeText(ctx.getApplicationContext(),"Conexion con el servidor", Toast.LENGTH_SHORT).show();
+                            //texto.setText(resultado);
+                            HttpHandlerUser.jsonValue = result;
+                        } else
+                            Toast.makeText(ctx.getApplicationContext(),"Conexion No Datos", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         };
         tr.start();
-        if (verifyRespondeServer(HttpHandlerUser.jsonValue)) {
-            Toast.makeText(ctx.getApplicationContext(),"Conexion con el servidor", Toast.LENGTH_SHORT).show();
-        }else
-            Toast.makeText(ctx.getApplicationContext(),"No Conexion con el servidor", Toast.LENGTH_SHORT).show();
 
         return HttpHandlerUser.jsonValue;
     }
-
-
 }

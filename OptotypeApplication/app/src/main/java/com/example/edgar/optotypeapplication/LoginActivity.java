@@ -11,6 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText    editTextUserName;
@@ -36,10 +40,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        //Trabajando en conexion y Login no borrar
-        HttpHandlerUser requestUser = new HttpHandlerUser("users/"+editTextUserName.getText().toString() + "," + editTextPaswword.getText().toString());
+        String resourceUser = "users/"+editTextUserName.getText().toString() + "," + editTextPaswword.getText().toString();
+        String jsonString;
+        JSONObject jsonObject;
+        JSONArray json_array = null;
 
-        Log.d("resultado: ", requestUser.connectToResource(this));
+        //Trabajando en conexion y Login no borrar
+        HttpHandlerUser requestUser = new HttpHandlerUser(resourceUser);
+        jsonString = requestUser.connectToResource(this);
+
+        //Log.d("resultado: ",jsonString);
+
+    }
+
+    public void showJson (){
 
     }
 }
