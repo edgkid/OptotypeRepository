@@ -19,8 +19,8 @@ import java.net.URL;
 public class HttpHandlerUser {
 
 
+    public static String jsonValue = "";
     private String request;
-    public static boolean resonseValue = false;
     ServerPath serverPath = new ServerPath();
 
     public HttpHandlerUser(String request) {
@@ -35,9 +35,11 @@ public class HttpHandlerUser {
         StringBuilder result = null;
         String path = serverPath.getHttp() + serverPath.getIpAdddress() + serverPath.getPathAddress();
 
+        Log.d("get: ",path + this.request);
+
         try{
 
-            url = new URL (path + "users");
+            url = new URL (path + this.request);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             responseCode = connection.getResponseCode();// en caso de que halla respuesta el valor es 200
 
@@ -78,31 +80,21 @@ public class HttpHandlerUser {
         return value;
     }
 
-    public void connectToResource (final LoginActivity ctx){
+    public String connectToResource (final LoginActivity ctx){
 
         Thread tr = new Thread(){
             @Override
             public void run() {
-
-                final String result = sendRequestGet();
-                ctx.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        if (verifyRespondeServer(result)) {
-                            Toast.makeText(ctx.getApplicationContext(),"Conexion con el servidor", Toast.LENGTH_SHORT).show();
-                            Log.d("resultado: ", result);
-                        }else
-                            Toast.makeText(ctx.getApplicationContext(),"No Conexion con el servidor", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                HttpHandlerUser.jsonValue = sendRequestGet();
             }
         };
-
         tr.start();
+        if (verifyRespondeServer(HttpHandlerUser.jsonValue)) {
+            Toast.makeText(ctx.getApplicationContext(),"Conexion con el servidor", Toast.LENGTH_SHORT).show();
+        }else
+            Toast.makeText(ctx.getApplicationContext(),"No Conexion con el servidor", Toast.LENGTH_SHORT).show();
 
-        //return value[0];
+        return HttpHandlerUser.jsonValue;
     }
 
 

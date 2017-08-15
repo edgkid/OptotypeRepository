@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,13 +37,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
 
         //Trabajando en conexion y Login no borrar
-        /*HttpHandlerUser requestUser = new HttpHandlerUser("users");
-        requestUser.connectToResource(this);*/
+        HttpHandlerUser requestUser = new HttpHandlerUser("users/"+editTextUserName.getText().toString() + "," + editTextPaswword.getText().toString());
 
-        Intent DashBoardActivity = new Intent(LoginActivity.this, DashBoardActivity.class);
-        DashBoardActivity .putExtra("UserName",editTextUserName.getText().toString());
-        DashBoardActivity.putExtra("Password",editTextPaswword.getText().toString());
-        startActivity(DashBoardActivity);
+        Log.d("resultado: ", requestUser.connectToResource(this));
 
     }
 }
