@@ -1,9 +1,13 @@
 package com.example.edgar.optotypeapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -18,13 +22,13 @@ import java.net.URL;
 
 public class HttpHandlerUser {
 
-
-    public static String jsonValue = "";
     private String request;
+    private Context context;
     ServerPath serverPath = new ServerPath();
 
-    public HttpHandlerUser(String request) {
+    public HttpHandlerUser(String request, Context context) {
         this.request = request;
+        this.context = context;
     }
 
     public String sendRequestGet (){
@@ -34,8 +38,6 @@ public class HttpHandlerUser {
         int responseCode;
         StringBuilder result = null;
         String path = serverPath.getHttp() + serverPath.getIpAdddress() + serverPath.getPathAddress();
-
-        Log.d("path: ", path + this.request);
 
         try{
 
@@ -57,14 +59,9 @@ public class HttpHandlerUser {
 
             }
 
-            Log.d("code: ", Integer.toString(responseCode));
-
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-        Log.d("result: ", result.toString());
 
         return result.toString();
     }
@@ -85,7 +82,7 @@ public class HttpHandlerUser {
         return value;
     }
 
-    public String connectToResource (final LoginActivity ctx){
+    public void connectToResource (final LoginActivity ctx){
 
         Thread tr = new Thread(){
             @Override
@@ -98,8 +95,7 @@ public class HttpHandlerUser {
 
                         if (verifyRespondeServer(result)){
                             Toast.makeText(ctx.getApplicationContext(),"Conexion con el servidor", Toast.LENGTH_SHORT).show();
-                            //texto.setText(resultado);
-                            HttpHandlerUser.jsonValue = result;
+                            procesingJson(result);
                         } else
                             Toast.makeText(ctx.getApplicationContext(),"Conexion No Datos", Toast.LENGTH_SHORT).show();
                     }
@@ -108,7 +104,31 @@ public class HttpHandlerUser {
             }
         };
         tr.start();
+        //tr.interrupt();
+    }
 
-        return HttpHandlerUser.jsonValue;
+    public void procesingJson (String result){
+
+        Log.d("json: ", result);
+        JSONArray array = null;
+
+        SharedPreferences loginPreferences = this.context.getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor preferencesEditor = loginPreferences.edit();
+
+        try {
+            array = new JSONArray(result);
+
+            for(int i=0; i<array.length(); i++){
+                JSONObject jsonObj  = array.getJSONObject(i);
+                preferencesEditor.putString("user", jsonObj.getString("username") );
+                preferencesEditor.putString("password",jsonObj.getString("userpassword"));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        preferencesEditor.commit();
+
     }
 }

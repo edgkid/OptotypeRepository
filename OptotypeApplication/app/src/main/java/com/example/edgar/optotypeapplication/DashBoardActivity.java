@@ -24,18 +24,18 @@ public class DashBoardActivity extends AppCompatActivity {
 
         //Para obtener los datos mientras termino la conexion
         ///esto deberia ser remplazado por el manejo desesiones y el objeto de usuario
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        String receiver = extras.getString("UserName");
+        //Intent intent = getIntent();
+        //Bundle extras = intent.getExtras();
+        //String receiver = extras.getString("UserName");
 
         listViewMenu = (ListView) findViewById(R.id.listViewDashBoardMenu);
         ArrayAdapter<String> adapterMenuDoctor = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1, menuDoctor);
         ArrayAdapter<String> adapterMenuPatient = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1, menuPatient);
 
-        if (receiver.equals("Doctor"))
+        /*if (receiver.equals("Doctor"))
             listViewMenu.setAdapter(adapterMenuDoctor);
         if(receiver.equals("Paciente"))
-            listViewMenu.setAdapter(adapterMenuPatient);
+            listViewMenu.setAdapter(adapterMenuPatient);*/
 
     }
 

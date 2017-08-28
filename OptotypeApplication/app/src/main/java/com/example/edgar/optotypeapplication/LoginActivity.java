@@ -41,19 +41,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
 
         String resourceUser = "users/"+editTextUserName.getText().toString() + "," + editTextPaswword.getText().toString();
-        String jsonString;
-        JSONObject jsonObject;
-        JSONArray json_array = null;
+        RequestUser requestUser = new RequestUser(resourceUser, this);
 
-        //Trabajando en conexion y Login no borrar
-        HttpHandlerUser requestUser = new HttpHandlerUser(resourceUser);
-        jsonString = requestUser.connectToResource(this);
-
-        //Log.d("resultado: ",jsonString);
+        if (requestUser.findUserOnSystem()){
+            Intent dashBoardActivity = new Intent(this, DashBoardActivity.class);
+            startActivity(dashBoardActivity);
+        }
 
     }
 
-    public void showJson (){
-
-    }
 }

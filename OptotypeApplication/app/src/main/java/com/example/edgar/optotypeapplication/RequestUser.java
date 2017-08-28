@@ -1,5 +1,8 @@
 package com.example.edgar.optotypeapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.TextView;
 
 /**
@@ -8,18 +11,35 @@ import android.widget.TextView;
 
 public class RequestUser {
 
-    UserSystem user = new UserSystem();
+    private String request;
+    private Context context;
 
-    TextView textTest;
-    DashBoardActivity dashBoard;
+    public RequestUser(String request, Context context) {
+        this.request = request;
+        this.context = context;
+    }
 
     public boolean findUserOnSystem (){
 
         boolean value = false;
-        String  request = "users";
-        HttpHandlerUser httpRequestUser = new HttpHandlerUser(request);
+        String password = "";
+        String user = "";
+        String roll = "";
 
-        //httpRequestUser.connectToResource(textTest,dashBoard);
+        HttpHandlerUser httpRequestUser = new HttpHandlerUser(request, context);
+        httpRequestUser.connectToResource((LoginActivity) context);
+
+        SharedPreferences loginPreferences = context.getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
+
+        Log.d("Datos: ",  loginPreferences.getString("user", "defaultUser"));
+        Log.d("Datos: ", loginPreferences.getString("password", "defaultUser"));
+
+        user = loginPreferences.getString("user", "defaultUser");
+        password = loginPreferences.getString("password", "defaultUser");
+
+        if (!user.equals("defaultUser") && !password.equals("defaultUser")){
+            value = true;
+        }
 
         return value;
     }

@@ -11,7 +11,7 @@ public class ServerPath {
     private String http;
 
     public ServerPath() {
-        this.ipAdddress = "10.0.0.45";
+        this.ipAdddress = "10.0.0.82";
         this.pathAddress = "/WebServerRepository/";
         this.http = "http://";
     }
