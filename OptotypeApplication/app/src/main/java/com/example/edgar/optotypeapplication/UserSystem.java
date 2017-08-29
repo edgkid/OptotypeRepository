@@ -11,18 +11,22 @@ public class UserSystem {
     private int idUser;
     private int fkRoll;
 
+    private UserRoll userRoll;
+
     public UserSystem() {
         this.userName ="";
         this.password = "";
         this.idUser = 0;
         this.fkRoll = 0;
+        this.userRoll = null;
     }
 
-    public UserSystem(String userName, String password, int idUser, int fkRoll) {
+    public UserSystem(String userName, String password, int idUser, int fkRoll, UserRoll userRoll) {
         this.userName = userName;
         this.password = password;
         this.idUser = idUser;
         this.fkRoll = fkRoll;
+        this.userRoll = userRoll;
     }
 
     public String getUserName() {
@@ -55,5 +59,13 @@ public class UserSystem {
 
     public void setFkRoll(int fkRoll) {
         this.fkRoll = fkRoll;
+    }
+
+    public UserRoll getUserRoll() {
+        return userRoll;
+    }
+
+    public void setUserRoll(UserRoll userRoll) {
+        this.userRoll = userRoll;
     }
 }

@@ -115,6 +115,7 @@ public class HttpHandlerUser {
         SharedPreferences loginPreferences = this.context.getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor preferencesEditor = loginPreferences.edit();
 
+
         try {
             array = new JSONArray(result);
 
@@ -122,6 +123,7 @@ public class HttpHandlerUser {
                 JSONObject jsonObj  = array.getJSONObject(i);
                 preferencesEditor.putString("user", jsonObj.getString("username") );
                 preferencesEditor.putString("password",jsonObj.getString("userpassword"));
+                preferencesEditor.putString("roll", jsonObj.getString("rollname"));
             }
 
         } catch (JSONException e) {
