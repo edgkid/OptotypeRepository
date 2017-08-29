@@ -104,7 +104,7 @@ public class HttpHandlerUser {
             }
         };
         tr.start();
-        //tr.interrupt();
+        tr.interrupt();
     }
 
     public void procesingJson (String result){
