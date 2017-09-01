@@ -7,12 +7,12 @@ package com.example.edgar.optotypeapplication;
 public class ImagePatient {
 
     private String data;
-    private String edad;
+    private String yearsOld;
     private int photo;
 
-    public ImagePatient(String data, String edad, int photo) {
+    public ImagePatient(String data, String yearsOld, int photo) {
         this.data = data;
-        this.edad = edad;
+        this.yearsOld = yearsOld;
         this.photo = photo;
     }
 
@@ -24,19 +24,19 @@ public class ImagePatient {
         this.data = data;
     }
 
-    public String getEdad() {
-        return edad;
-    }
-
-    public void setEdad(String edad) {
-        this.edad = edad;
-    }
-
     public int getPhoto() {
         return photo;
     }
 
     public void setPhoto(int photo) {
         this.photo = photo;
+    }
+
+    public String getYearsOld() {
+        return yearsOld;
+    }
+
+    public void setYearsOld(String yearsOld) {
+        this.yearsOld = yearsOld;
     }
 }
