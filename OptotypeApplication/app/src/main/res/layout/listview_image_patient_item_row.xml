@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/imagePatientItemRow"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_weight="1"
         android:src="@drawable/usuario_icon"/>
 
@@ -15,12 +15,14 @@
         android:id="@+id/textDataPatientItemRow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="9"
-        android:text="texto de item"/>
+        android:layout_weight="5"
+        android:text="text full name"/>
 
     <TextView
         android:id="@+id/textYearsOldItemRow"
         android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:text="text years old"/>
 
 </LinearLayout>

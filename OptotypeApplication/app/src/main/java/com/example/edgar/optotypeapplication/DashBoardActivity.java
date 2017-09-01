@@ -21,7 +21,6 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
     ListView listViewMenu;
     Context contextActivity;
 
-    //ArrayAdapter<String> adapterMenuPatient;
     ImagePatient listPatient[];
     ImagePatientAdapter imagePatientAdapter;
 
@@ -29,27 +28,39 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
     ImageView imageUser;
     TextView userName;
 
-    //String [] menuPatient = new String []{"Optotypes"};
     String [] menuDoctor = new String []{"Asociar Test", "Opción B", "Opción C" };
 
     public void loadDataForListPatient(){
-       ///this.adapterMenuPatient = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1, menuPatient);
 
         listPatient  = new ImagePatient[]{
-                new ImagePatient("3","Edgar Landaeta", R.drawable.usuario_icon),
-                new ImagePatient("4","Juan Landaeta", R.drawable.usuario_icon),
-                new ImagePatient("4","Gabriel Landaeta", R.drawable.usuario_icon),
-                new ImagePatient("4","Adira Quintero", R.drawable.usuario_icon),
-                new ImagePatient("5","Victoria Malave", R.drawable.usuario_icon),
-                new ImagePatient("3","Dimas Landaeta", R.drawable.usuario_icon),
-                new ImagePatient("3","Juan Vega", R.drawable.usuario_icon),
-                new ImagePatient("4","Spartacus sirio", R.drawable.usuario_icon),
-                new ImagePatient("5","Enomao Batiato", R.drawable.usuario_icon),
-                new ImagePatient("4","Marcos Carasos", R.drawable.usuario_icon),
+                new ImagePatient("Edgar Landaeta","3", R.drawable.usuario_icon),
+                new ImagePatient("Juan Landaeta","4", R.drawable.usuario_icon),
+                new ImagePatient("Gabriel Landaeta","4", R.drawable.usuario_icon),
+                new ImagePatient("Adira Quintero","4", R.drawable.usuario_icon),
+                new ImagePatient("Victoria Malave","3", R.drawable.usuario_icon),
+                new ImagePatient("Dimas Landaeta","3", R.drawable.usuario_icon),
+                new ImagePatient("Juan Vega","5", R.drawable.usuario_icon),
+                new ImagePatient("Spartacus sirio","5", R.drawable.usuario_icon),
+                new ImagePatient("Enomao Batiato","4", R.drawable.usuario_icon),
+                new ImagePatient("Marcos Carasos","3", R.drawable.usuario_icon),
         };
 
     }
 
+
+    public void loadMenu(){
+        SharedPreferences preferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
+
+        if (preferences.getString("roll", "defaultroll").equals("Doctor")){
+            ArrayAdapter<String> adapterMenuDoctor = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1, menuDoctor);
+            listViewMenu.setAdapter(adapterMenuDoctor);
+        }else if(preferences.getString("roll", "defaultroll").equals("Paciente Infantil")){
+            loadDataForListPatient();
+            imagePatientAdapter = new ImagePatientAdapter(contextActivity, R.layout.listview_image_patient_item_row, listPatient);
+            listViewMenu.setAdapter(this.imagePatientAdapter);
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,22 +72,11 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
         logOut = (Button) findViewById(R.id.buttonLogout);
         imageUser = (ImageView) findViewById(R.id.imageViewLoginUser);
         userName = (TextView) findViewById(R.id.textViewLoginUser);
+        listViewMenu = (ListView) findViewById(R.id.listViewDashBoardMenu);
 
         logOut.setOnClickListener(this);
 
-        listViewMenu = (ListView) findViewById(R.id.listViewDashBoardMenu);
-        ArrayAdapter<String> adapterMenuDoctor = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1, menuDoctor);
-        //ArrayAdapter<String> adapterMenuPatient = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1, menuPatient);
-
-        SharedPreferences preferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
-
-        if (preferences.getString("roll", "defaultroll").equals("Doctor")){
-            listViewMenu.setAdapter(adapterMenuDoctor);
-        }else if(preferences.getString("roll", "defaultroll").equals("Paciente Infantil")){
-            loadDataForListPatient();
-            imagePatientAdapter = new ImagePatientAdapter(contextActivity, R.layout.listview_image_patient_item_row, listPatient);
-            listViewMenu.setAdapter(this.imagePatientAdapter);
-        }
+        loadMenu();
 
     }
 

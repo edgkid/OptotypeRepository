@@ -45,7 +45,6 @@ public class ImagePatientAdapter extends ArrayAdapter<ImagePatient> {
             holder.textData = (TextView) row.findViewById(R.id.textDataPatientItemRow);
             holder.textYears = (TextView) row.findViewById(R.id.textYearsOldItemRow);
 
-
             row.setTag(holder);
         }else{
             holder = (ImagePatientHolder) row.getTag();
