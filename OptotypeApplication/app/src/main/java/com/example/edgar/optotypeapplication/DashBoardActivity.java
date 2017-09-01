@@ -67,13 +67,13 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
         listViewMenu = (ListView) findViewById(R.id.listViewDashBoardMenu);
         ArrayAdapter<String> adapterMenuDoctor = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1, menuDoctor);
         //ArrayAdapter<String> adapterMenuPatient = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1, menuPatient);
-        loadDataForListPatient();
 
         SharedPreferences preferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
 
         if (preferences.getString("roll", "defaultroll").equals("Doctor")){
             listViewMenu.setAdapter(adapterMenuDoctor);
         }else if(preferences.getString("roll", "defaultroll").equals("Paciente Infantil")){
+            loadDataForListPatient();
             imagePatientAdapter = new ImagePatientAdapter(contextActivity, R.layout.listview_image_patient_item_row, listPatient);
             listViewMenu.setAdapter(this.imagePatientAdapter);
         }
