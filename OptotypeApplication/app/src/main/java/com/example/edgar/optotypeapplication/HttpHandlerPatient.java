@@ -1,13 +1,10 @@
 package com.example.edgar.optotypeapplication;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -17,24 +14,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by Edgar on 13/08/2017.
+ * Created by Edgar on 02/09/2017.
  */
 
-public class HttpHandlerUser {
+public class HttpHandlerPatient {
 
     private String request;
     private Context context;
     ServerPath serverPath = new ServerPath();
 
-    public HttpHandlerUser(String request, Context context) {
+    public HttpHandlerPatient(String request, Context context) {
         this.request = request;
         this.context = context;
     }
 
     public String sendRequestGet (){
 
-
-        Log.d("ingresa: ", "sendRequesGet");
         URL url = null;
         String line = "";
         int responseCode;
@@ -44,6 +39,7 @@ public class HttpHandlerUser {
         try{
 
             url = new URL (path + this.request);
+            Log.d("path: ", path + this.request );
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             responseCode = connection.getResponseCode();// en caso de que halla respuesta el valor es 200
 
@@ -66,6 +62,7 @@ public class HttpHandlerUser {
         }
 
         Log.d("result: ", result.toString());
+
         return result.toString();
     }
 
@@ -85,9 +82,8 @@ public class HttpHandlerUser {
         return value;
     }
 
-    public void connectToResource (final LoginActivity ctx){
+    public void connectToResource (final DashBoardActivity ctx){
 
-        Log.d("ingreso: ", "connectToResource");
         Thread tr = new Thread(){
             @Override
             public void run() {
@@ -98,43 +94,17 @@ public class HttpHandlerUser {
                     public void run() {
 
                         if (verifyRespondeServer(result)){
-                            Toast.makeText(ctx.getApplicationContext(),"Conexion con login", Toast.LENGTH_SHORT).show();
-                            //procesingJson(result);
+                            Toast.makeText(ctx.getApplicationContext(),"Conexion con patients", Toast.LENGTH_SHORT).show();
                         } else
-                            Toast.makeText(ctx.getApplicationContext(),"Conexion No login", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ctx.getApplicationContext(),"Conexion No patients", Toast.LENGTH_SHORT).show();
                     }
                 });
 
             }
         };
         tr.start();
-        //tr.interrupt();
+        tr.interrupt();
     }
 
-    public void procesingJson (String result){
 
-        Log.d("json: ", result);
-        JSONArray array = null;
-
-        SharedPreferences loginPreferences = this.context.getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
-        SharedPreferences.Editor preferencesEditor = loginPreferences.edit();
-
-
-        try {
-            array = new JSONArray(result);
-
-            for(int i=0; i<array.length(); i++){
-                JSONObject jsonObj  = array.getJSONObject(i);
-                preferencesEditor.putString("user", jsonObj.getString("username") );
-                preferencesEditor.putString("password",jsonObj.getString("userpassword"));
-                preferencesEditor.putString("roll", jsonObj.getString("rollname"));
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        preferencesEditor.commit();
-
-    }
 }

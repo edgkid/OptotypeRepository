@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -44,6 +45,12 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
                 new ImagePatient("Enomao Batiato","4", R.drawable.usuario_icon),
                 new ImagePatient("Marcos Carasos","3", R.drawable.usuario_icon),
         };
+
+        /*Log.d("Solicitu: ", "pedir pacientes del día");
+        HttpHandlerPatient httpRequest = new HttpHandlerPatient("patients", this);
+        httpRequest.connectToResource(this);
+
+        Log.d("d","d");*/
 
     }
 

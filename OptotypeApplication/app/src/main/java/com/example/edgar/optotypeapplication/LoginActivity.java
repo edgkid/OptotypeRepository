@@ -41,12 +41,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
 
         String resourceUser = "users/"+editTextUserName.getText().toString() + "," + editTextPaswword.getText().toString();
-        RequestUser requestUser = new RequestUser(resourceUser, this);
+       /* RequestUser requestUser = new RequestUser(resourceUser, this);
 
         if (requestUser.findUserOnSystem()){
             Intent dashBoardActivity = new Intent(this, DashBoardActivity.class);
             startActivity(dashBoardActivity);
-        }
+        }*/
+
+        HttpHandlerUser httpRequestUser = new HttpHandlerUser(resourceUser, this);
+        httpRequestUser.connectToResource(this);
+
 
     }
 
