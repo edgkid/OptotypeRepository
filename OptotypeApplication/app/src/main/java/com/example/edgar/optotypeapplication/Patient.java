@@ -29,8 +29,8 @@ public class Patient {
         this.fkUser = fkUser;
     }
 
-    public int getIdPatient() {
-        return idPatient;
+    public int getIdPatient(int idPatient) {
+        return this.idPatient;
     }
 
     public void setIdPatient(int idPatient) {

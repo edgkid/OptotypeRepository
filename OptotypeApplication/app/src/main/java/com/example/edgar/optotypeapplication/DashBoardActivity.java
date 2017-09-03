@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class DashBoardActivity extends AppCompatActivity implements View.OnClickListener {
 
     ListView listViewMenu;
@@ -33,6 +35,9 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
 
     public void loadDataForListPatient(){
 
+        String resourcePatient = "patients";
+        ArrayList<Patient> patients= new ArrayList <Patient> ();
+
         listPatient  = new ImagePatient[]{
                 new ImagePatient("Edgar Landaeta","3", R.drawable.usuario_icon),
                 new ImagePatient("Juan Landaeta","4", R.drawable.usuario_icon),
@@ -46,11 +51,8 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
                 new ImagePatient("Marcos Carasos","3", R.drawable.usuario_icon),
         };
 
-        /*Log.d("Solicitu: ", "pedir pacientes del día");
-        HttpHandlerPatient httpRequest = new HttpHandlerPatient("patients", this);
-        httpRequest.connectToResource(this);
-
-        Log.d("d","d");*/
+        RequestPatient requestPatient = new RequestPatient(resourcePatient, this);
+        requestPatient.findPatientsToDay(patients);
 
     }
 

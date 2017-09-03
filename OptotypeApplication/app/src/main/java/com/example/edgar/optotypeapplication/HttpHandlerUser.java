@@ -39,19 +39,20 @@ public class HttpHandlerUser {
         String line = "";
         int responseCode;
         StringBuilder result = null;
-        String path = serverPath.getHttp() + serverPath.getIpAdddress() + serverPath.getPathAddress();
+        String path = serverPath.getHttp() + serverPath.getIpAdddress() + serverPath.getPathAddress()+ this.request;
 
+        Log.d("url: ", path);
         try{
 
-            url = new URL (path + this.request);
+            url = new URL (path);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             responseCode = connection.getResponseCode();// en caso de que halla respuesta el valor es 200
 
-            result = new StringBuilder();
-
+            Log.d("codigo: ", Integer.toString(responseCode));
             // equivalente a preguntar si la respuesta es igual a 200
-            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_BAD_REQUEST){
+            if (responseCode == HttpURLConnection.HTTP_OK){
 
+                result = new StringBuilder();
                 InputStream input = new BufferedInputStream(connection.getInputStream());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 
@@ -65,7 +66,6 @@ public class HttpHandlerUser {
             e.printStackTrace();
         }
 
-        Log.d("result: ", result.toString());
         return result.toString();
     }
 
@@ -99,7 +99,7 @@ public class HttpHandlerUser {
 
                         if (verifyRespondeServer(result)){
                             Toast.makeText(ctx.getApplicationContext(),"Conexion con login", Toast.LENGTH_SHORT).show();
-                            //procesingJson(result);
+                            procesingJson(result);
                         } else
                             Toast.makeText(ctx.getApplicationContext(),"Conexion No login", Toast.LENGTH_SHORT).show();
                     }
@@ -108,12 +108,11 @@ public class HttpHandlerUser {
             }
         };
         tr.start();
-        //tr.interrupt();
+        tr.interrupt();
     }
 
     public void procesingJson (String result){
 
-        Log.d("json: ", result);
         JSONArray array = null;
 
         SharedPreferences loginPreferences = this.context.getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
