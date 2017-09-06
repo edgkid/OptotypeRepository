@@ -6,19 +6,20 @@ package com.example.edgar.optotypeapplication;
 
 public class Patient {
 
-    private int idPatient;
+    private String idPatient;
     private String name;
     private String LastName;
     private String middleName;
     private String maidenName;
-    private int yearsOld;
+    private String yearsOld;
     private String photo;
     private String fkUser;
 
     public Patient (){
 
     }
-    public Patient(int idPatient, String name, String lastName, String middleName, String maidenName, int yearsOld, String photo, String fkUser) {
+
+    public Patient(String idPatient, String name, String lastName, String middleName, String maidenName, String yearsOld, String photo, String fkUser) {
         this.idPatient = idPatient;
         this.name = name;
         LastName = lastName;
@@ -29,11 +30,11 @@ public class Patient {
         this.fkUser = fkUser;
     }
 
-    public int getIdPatient(int idPatient) {
-        return this.idPatient;
+    public String getIdPatient() {
+        return idPatient;
     }
 
-    public void setIdPatient(int idPatient) {
+    public void setIdPatient(String idPatient) {
         this.idPatient = idPatient;
     }
 
@@ -69,11 +70,11 @@ public class Patient {
         this.maidenName = maidenName;
     }
 
-    public int getYearsOld() {
+    public String getYearsOld() {
         return yearsOld;
     }
 
-    public void setYearsOld(int yearsOld) {
+    public void setYearsOld(String yearsOld) {
         this.yearsOld = yearsOld;
     }
 

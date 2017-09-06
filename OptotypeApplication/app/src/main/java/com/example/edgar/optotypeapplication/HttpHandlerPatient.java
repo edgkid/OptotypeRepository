@@ -1,7 +1,9 @@
 package com.example.edgar.optotypeapplication;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -47,7 +49,7 @@ public class HttpHandlerPatient {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             responseCode = connection.getResponseCode();// en caso de que halla respuesta el valor es 200
 
-            Log.d("code: ", Integer.toString(responseCode));
+            Log.d("code paciente: ", Integer.toString(responseCode));
             // equivalente a preguntar si la respuesta es igual a 200
             if (responseCode == HttpURLConnection.HTTP_OK){
 
@@ -84,7 +86,7 @@ public class HttpHandlerPatient {
         return value;
     }
 
-    public void connectToResource (final DashBoardActivity ctx, final ArrayList patients){
+    public void connectToResource (final DashBoardActivity ctx){
 
         Thread tr = new Thread(){
             @Override
@@ -97,42 +99,55 @@ public class HttpHandlerPatient {
 
                         if (verifyRespondeServer(result)){
                             Toast.makeText(ctx.getApplicationContext(),"Conexion con patients", Toast.LENGTH_SHORT).show();
-                            procesingJson(result, patients);
+                            procesingJson(result);
                         } else
                             Toast.makeText(ctx.getApplicationContext(),"Conexion No patients", Toast.LENGTH_SHORT).show();
+                        interrupt();
                     }
                 });
 
             }
         };
         tr.start();
-        tr.interrupt();
+
     }
 
-    public void procesingJson (String result, ArrayList patients){
+    public void procesingJson (String result){
 
         JSONArray array = null;
-        Patient patient = null;
+        //Patient patient = null;
+        ContentValues values = new ContentValues();
 
         Log.d("JSON: ", result.toString());
 
         try {
+
+            Log.d("trabajando: ", "SQLite");
+
             array = new JSONArray(result);
 
-            for(int i=0; i<array.length(); i++){
-                JSONObject jsonObj  = array.getJSONObject(i);
-                //System.out.println(jsonObj.getString("firstname"));
-                patient = new Patient();
-                patient.setIdPatient(Integer.parseInt(jsonObj.getString("idpatient")));
-                patient.setName(jsonObj.getString("firstname"));
-                patient.setMiddleName(jsonObj.getString("middlename"));
-                patient.setLastName(jsonObj.getString("lastname"));
-                patient.setMaidenName(jsonObj.getString("maidenname"));
-                patient.setYearsOld(Integer.parseInt(jsonObj.getString("yearsold")));
-                patient.setFkUser(jsonObj.getString("fkuser"));
-                patient.setPhoto(Integer.toString(R.drawable.usuario_icon));
+            PatientDbHelper PatientDb = new PatientDbHelper(this.context);
+            SQLiteDatabase db = PatientDb.getWritableDatabase();
 
-                patients.add(patient);
+
+
+
+            for(int i=0; i<array.length(); i++){
+
+                JSONObject jsonObj  = array.getJSONObject(i);
+
+                /*values.put(PatientDbContract.PatientEntry.ID, jsonObj.getString("idpatient"));
+                values.put(PatientDbContract.PatientEntry.NAME, jsonObj.getString("firstname"));
+                values.put(PatientDbContract.PatientEntry.MIDDLENAME, jsonObj.getString("middlename"));
+                values.put(PatientDbContract.PatientEntry.LASTNAME, jsonObj.getString("lastname"));
+                values.put(PatientDbContract.PatientEntry.MAIDENNAME, jsonObj.getString("maidenname"));
+                values.put(PatientDbContract.PatientEntry.YEARSOLD, jsonObj.getString("yearsold"));
+                values.put(PatientDbContract.PatientEntry.FKUSER, jsonObj.getString("fkuser"));
+                values.put(PatientDbContract.PatientEntry.PHOTO, Integer.toString(R.drawable.usuario_icon));
+
+
+                db.insert(PatientDbContract.PatientEntry.TABLE_NAME, null, values);*/
+
             }
 
         } catch (JSONException e) {

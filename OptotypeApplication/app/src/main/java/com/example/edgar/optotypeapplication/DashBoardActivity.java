@@ -3,6 +3,7 @@ package com.example.edgar.optotypeapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,6 +54,8 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
 
         RequestPatient requestPatient = new RequestPatient(resourcePatient, this);
         requestPatient.findPatientsToDay(patients);
+
+
 
     }
 

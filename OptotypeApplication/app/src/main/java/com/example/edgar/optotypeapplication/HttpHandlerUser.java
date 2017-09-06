@@ -48,7 +48,7 @@ public class HttpHandlerUser {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             responseCode = connection.getResponseCode();// en caso de que halla respuesta el valor es 200
 
-            Log.d("codigo: ", Integer.toString(responseCode));
+            Log.d("codigo login: ", Integer.toString(responseCode));
             // equivalente a preguntar si la respuesta es igual a 200
             if (responseCode == HttpURLConnection.HTTP_OK){
 
@@ -100,15 +100,16 @@ public class HttpHandlerUser {
                         if (verifyRespondeServer(result)){
                             Toast.makeText(ctx.getApplicationContext(),"Conexion con login", Toast.LENGTH_SHORT).show();
                             procesingJson(result);
+
                         } else
                             Toast.makeText(ctx.getApplicationContext(),"Conexion No login", Toast.LENGTH_SHORT).show();
+                        interrupt();
                     }
                 });
 
             }
         };
         tr.start();
-        tr.interrupt();
     }
 
     public void procesingJson (String result){
