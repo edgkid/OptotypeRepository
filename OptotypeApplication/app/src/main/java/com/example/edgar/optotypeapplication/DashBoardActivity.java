@@ -52,11 +52,6 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
                 new ImagePatient("Marcos Carasos","3", R.drawable.usuario_icon),
         };
 
-        RequestPatient requestPatient = new RequestPatient(resourcePatient, this);
-        requestPatient.findPatientsToDay(patients);
-
-
-
     }
 
 

@@ -29,16 +29,16 @@ public class PatientDbHelper extends SQLiteOpenHelper {
 
         // crear Tablas de base de datos
         sql = sql + "CREATE TABLE " + PatientDbContract.PatientEntry.TABLE_NAME + " ( ";
-        sql = sql + PatientDbContract.PatientEntry._ID + "INTEGER PRIMARY KEY AUTOINCREMENT,";
-        sql = sql + PatientDbContract.PatientEntry.ID + ", ";
-        sql = sql + PatientDbContract.PatientEntry.NAME + ", ";
-        sql = sql + PatientDbContract.PatientEntry.LASTNAME + ", ";
-        sql = sql + PatientDbContract.PatientEntry.MAIDENNAME + ", ";
-        sql = sql + PatientDbContract.PatientEntry.MAIDENNAME + ", ";
-        sql = sql + PatientDbContract.PatientEntry.YEARSOLD + ", ";
-        sql = sql + PatientDbContract.PatientEntry.PHOTO + ", ";
-        sql = sql + PatientDbContract.PatientEntry.FKUSER + ", ";
-        sql = sql + "UNIQUE (" + PatientDbContract.PatientEntry.ID + " ) ";
+        sql = sql + PatientDbContract.PatientEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, ";
+        sql = sql + PatientDbContract.PatientEntry.ID + " TEXT, ";
+        sql = sql + PatientDbContract.PatientEntry.NAME + " TEXT, ";
+        sql = sql + PatientDbContract.PatientEntry.LASTNAME + " TEXT, ";
+        sql = sql + PatientDbContract.PatientEntry.MIDDLENAME + " TEXT, ";
+        sql = sql + PatientDbContract.PatientEntry.MAIDENNAME + " TEXT, ";
+        sql = sql + PatientDbContract.PatientEntry.YEARSOLD + " TEXT, ";
+        sql = sql + PatientDbContract.PatientEntry.PHOTO + " TEXT, ";
+        sql = sql + PatientDbContract.PatientEntry.FKUSER + " TEXT, ";
+        sql = sql + " UNIQUE ( " + PatientDbContract.PatientEntry.ID + " ) ";
         sql = sql +" ) ";
 
         db.execSQL(sql);
@@ -56,7 +56,7 @@ public class PatientDbHelper extends SQLiteOpenHelper {
         sql = sql + PatientDbContract.PatientEntry.ID + " TEXT, ";
         sql = sql + PatientDbContract.PatientEntry.NAME + " TEXT, ";
         sql = sql + PatientDbContract.PatientEntry.LASTNAME + " TEXT, ";
-        sql = sql + PatientDbContract.PatientEntry.MAIDENNAME + " TEXT, ";
+        sql = sql + PatientDbContract.PatientEntry.MIDDLENAME + " TEXT, ";
         sql = sql + PatientDbContract.PatientEntry.MAIDENNAME + " TEXT, ";
         sql = sql + PatientDbContract.PatientEntry.YEARSOLD + " TEXT, ";
         sql = sql + PatientDbContract.PatientEntry.PHOTO + " TEXT, ";

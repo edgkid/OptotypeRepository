@@ -129,14 +129,11 @@ public class HttpHandlerPatient {
             PatientDbHelper PatientDb = new PatientDbHelper(this.context);
             SQLiteDatabase db = PatientDb.getWritableDatabase();
 
-
-
-
             for(int i=0; i<array.length(); i++){
 
                 JSONObject jsonObj  = array.getJSONObject(i);
 
-                /*values.put(PatientDbContract.PatientEntry.ID, jsonObj.getString("idpatient"));
+                values.put(PatientDbContract.PatientEntry.ID, jsonObj.getString("idpatient"));
                 values.put(PatientDbContract.PatientEntry.NAME, jsonObj.getString("firstname"));
                 values.put(PatientDbContract.PatientEntry.MIDDLENAME, jsonObj.getString("middlename"));
                 values.put(PatientDbContract.PatientEntry.LASTNAME, jsonObj.getString("lastname"));
@@ -145,8 +142,7 @@ public class HttpHandlerPatient {
                 values.put(PatientDbContract.PatientEntry.FKUSER, jsonObj.getString("fkuser"));
                 values.put(PatientDbContract.PatientEntry.PHOTO, Integer.toString(R.drawable.usuario_icon));
 
-
-                db.insert(PatientDbContract.PatientEntry.TABLE_NAME, null, values);*/
+                db.insert(PatientDbContract.PatientEntry.TABLE_NAME, null, values);
 
             }
 

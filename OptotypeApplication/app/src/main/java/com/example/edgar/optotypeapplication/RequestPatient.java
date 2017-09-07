@@ -22,20 +22,20 @@ public class RequestPatient {
         this.context = context;
     }
 
-    public void findPatientsToDay(ArrayList patients){
+    public void findPatientsToDay(){
 
-        HttpHandlerPatient httpRequest = new HttpHandlerPatient(this.request, this.context);
-        httpRequest.connectToResource((DashBoardActivity) this.context);
 
-        /*PatientDbHelper PatientDb = new PatientDbHelper(this.context);
+        PatientDbHelper PatientDb = new PatientDbHelper(this.context);
         SQLiteDatabase db = PatientDb.getWritableDatabase();
+
+        Log.d(".....","Consultar");
         Cursor c = db.rawQuery("SELECT name FROM patient", null);
         if (c.moveToFirst()){
             do{
                 String nombre = c.getString(0);
                 Log.d("name ", nombre);
             }while(c.moveToNext());
-        }*/
+        }
 
     }
 }
