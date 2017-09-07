@@ -144,6 +144,8 @@ public class HttpHandlerPatient {
 
                 db.insert(PatientDbContract.PatientEntry.TABLE_NAME, null, values);
 
+                Log.d("inserta ", jsonObj.getString("idpatient"));
+
             }
 
         } catch (JSONException e) {

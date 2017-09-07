@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -83,6 +84,9 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
 
         logOut.setOnClickListener(this);
 
+        RequestPatient requestPatient = new RequestPatient("patients", this);
+        requestPatient.findPatientsToDay();
+
         loadMenu();
 
     }
@@ -96,8 +100,18 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
         preferencesEditor.clear();
         preferencesEditor.commit();
 
+        cleanLocalDataBase();
+
         Intent loginActivity = new Intent(this, LoginActivity.class);
         startActivity(loginActivity);
 
+    }
+
+    public void cleanLocalDataBase (){
+
+        PatientDbHelper PatientDb = new PatientDbHelper(this.contextActivity);
+        SQLiteDatabase db = PatientDb.getWritableDatabase();
+
+        db.delete("patient", null, null);
     }
 }

@@ -43,12 +43,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String resourceUser = "users/"+editTextUserName.getText().toString() + "," + editTextPaswword.getText().toString();
         RequestUser requestUser = new RequestUser(resourceUser, this);
 
-        RequestPatient requestPatient = new RequestPatient("patients", this);
-        requestPatient.findPatientsToDay();
-
         if (requestUser.findUserOnSystem()){
             Intent dashBoardActivity = new Intent(this, DashBoardActivity.class);
             startActivity(dashBoardActivity);
+
         }
 
     }
