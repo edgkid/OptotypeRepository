@@ -20,6 +20,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class DashBoardActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,20 +39,29 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
     public void loadDataForListPatient(){
 
         String resourcePatient = "patients";
-        ArrayList<Patient> patients= new ArrayList <Patient> ();
+        String name = "";
+        String yearsOld = "";
+        int count = 0;
+        ArrayList<Patient> patients = new ArrayList <Patient> ();
 
-        listPatient  = new ImagePatient[]{
-                new ImagePatient("Edgar Landaeta","3", R.drawable.usuario_icon),
-                new ImagePatient("Juan Landaeta","4", R.drawable.usuario_icon),
-                new ImagePatient("Gabriel Landaeta","4", R.drawable.usuario_icon),
-                new ImagePatient("Adira Quintero","4", R.drawable.usuario_icon),
-                new ImagePatient("Victoria Malave","3", R.drawable.usuario_icon),
-                new ImagePatient("Dimas Landaeta","3", R.drawable.usuario_icon),
-                new ImagePatient("Juan Vega","5", R.drawable.usuario_icon),
-                new ImagePatient("Spartacus sirio","5", R.drawable.usuario_icon),
-                new ImagePatient("Enomao Batiato","4", R.drawable.usuario_icon),
-                new ImagePatient("Marcos Carasos","3", R.drawable.usuario_icon),
-        };
+        RequestPatient requestPatient = new RequestPatient(this.contextActivity);
+        requestPatient.fillListPatientsToDay(patients);
+
+
+        if (!patients.isEmpty()) {
+            listPatient = new ImagePatient[]{
+                    new ImagePatient("Edgar Landaeta", "3", R.drawable.usuario_icon),
+                    new ImagePatient("Juan Landaeta", "4", R.drawable.usuario_icon),
+                    new ImagePatient("Gabriel Landaeta", "4", R.drawable.usuario_icon),
+                    new ImagePatient("Adira Quintero", "4", R.drawable.usuario_icon),
+                    new ImagePatient("Victoria Malave", "3", R.drawable.usuario_icon),
+                    new ImagePatient("Dimas Landaeta", "3", R.drawable.usuario_icon),
+                    new ImagePatient("Juan Vega", "5", R.drawable.usuario_icon),
+                    new ImagePatient("Spartacus sirio", "5", R.drawable.usuario_icon),
+                    new ImagePatient("Enomao Batiato", "4", R.drawable.usuario_icon),
+                    new ImagePatient("Marcos Carasos", "3", R.drawable.usuario_icon),
+            };
+        }
 
     }
 
